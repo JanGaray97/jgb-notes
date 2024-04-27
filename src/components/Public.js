@@ -4,18 +4,19 @@ const Public = () => {
     const content = (
         <section className="public">
             <header>
-                <h1>Welcome to <span className="nowrap">Dan D. Repairs!</span></h1>
+                <h1>Bienvenido a <span className="nowrap">Garay Reparaciones! </span></h1>
             </header>
             <main className="public__main">
-                <p>Located in Beautiful Downtown Foo City, Dan D. Repairs  provides a trained staff ready to meet your tech repair needs.</p>
+                <p>Ubicado la hermosa ciudad de Cartagena de indias, Garay reparaciones ofrece un personal capacitado listo para satisfacer sus necesidades de reparación tecnológica.</p>
                 <address className="public__addr">
-                    Dan D. Repairs<br />
-                    555 Foo Drive<br />
-                    Foo City, CA 12345<br />
-                    <a href="tel:+15555555555">(555) 555-5555</a>
+                    Garay Reparaciones<br />
+                    Barrio la plazuela<br />
+                    Diagonal 31 No. 71-136 Piso 2 local E4.<br />
+                    Cartagena de indias<br />
+                    <a href="tel:313 7690230">(+57 5) 6613386</a>
                 </address>
                 <br />
-                <p>Owner: Dan Davidson</p>
+                <p>Propietario: Jan Garay</p>
             </main>
             <footer>
                 <Link to="/login">Employee Login</Link>
