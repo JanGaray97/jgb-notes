@@ -94,7 +94,7 @@ const NewNoteForm = ({ users }) => {
                 />
 
                 <label className="form__label form__checkbox-container" htmlFor="username">
-                    ASSIGNED TO:</label>
+                    ASIGNADO A:</label>
                 <select
                     id="username"
                     name="username"

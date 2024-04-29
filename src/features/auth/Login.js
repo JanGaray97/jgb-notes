@@ -47,7 +47,7 @@ const Login = () => {
             } else {
                 setErrMsg(err.data?.message);
             }
-            errRef.current.focus();
+            
         }
     }
 
@@ -57,18 +57,18 @@ const Login = () => {
 
     const errClass = errMsg ? "errmsg" : "offscreen"
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) return <p>...</p>
 
     const content = (
         <section className="public">
             <header>
-                <h1>Employee Login</h1>
+                <h1>Login Empleados</h1>
             </header>
             <main className="login">
                 <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
 
                 <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Nombre de usuario:</label>
                     <input
                         className="form__input"
                         type="text"
@@ -80,7 +80,7 @@ const Login = () => {
                         required
                     />
 
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">Contraseña:</label>
                     <input
                         className="form__input"
                         type="password"
@@ -89,7 +89,7 @@ const Login = () => {
                         value={password}
                         required
                     />
-                    <button className="form__submit-button">Sign In</button>
+                    <button className="form__submit-button">Iniciar sesión</button>
 
 
                     <label htmlFor="persist" className="form__persist">
@@ -100,12 +100,12 @@ const Login = () => {
                             onChange={handleToggle}
                             checked={persist}
                         />
-                        Trust This Device
+                        Confia en este dispositivo
                     </label>
                 </form>
             </main>
             <footer>
-                <Link to="/">Back to Home</Link>
+                <Link to="/">Home</Link>
             </footer>
         </section>
     )

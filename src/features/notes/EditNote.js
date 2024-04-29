@@ -30,7 +30,7 @@ const EditNote = () => {
 
     if (!isManager && !isAdmin) {
         if (note.username !== username) {
-            return <p className="errmsg">No access</p>
+            return <p className="errmsg">Sin acceso</p>
         }
     }
 

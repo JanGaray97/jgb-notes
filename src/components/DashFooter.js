@@ -28,7 +28,7 @@ const DashFooter = () => {
     const content = (
         <footer className="dash-footer">
             {goHomeButton}
-            <p>Current User: {username}</p>
+            <p>Usuario actual: {username}</p>
             <p>Status: {status}</p>
         </footer>
     )

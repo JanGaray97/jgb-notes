@@ -19,7 +19,7 @@ const Public = () => {
                 <p>Propietario: Jan Garay</p>
             </main>
             <footer>
-                <Link to="/login">Employee Login</Link>
+                <Link to="/login">Login Empleados</Link>
             </footer>
         </section>
 

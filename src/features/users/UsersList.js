@@ -17,7 +17,7 @@ const UsersList = () => {
 
     let content
 
-    if (isLoading) content = <p>Loading...</p>
+    if (isLoading) content = <p>Cargando...</p>
 
     if (isError) {
         content = <p className="errmsg">{error?.data?.message}</p>
