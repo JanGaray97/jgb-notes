@@ -17,7 +17,7 @@ const DashFooter = () => {
         goHomeButton = (
             <button
                 className="dash-footer__button icon-button"
-                title="Home"
+                title="Regresar atras"
                 onClick={onGoHomeClicked}
             >
                 <FontAwesomeIcon icon={faHouse} />
@@ -29,7 +29,7 @@ const DashFooter = () => {
         <footer className="dash-footer">
             {goHomeButton}
             <p>Usuario actual: {username}</p>
-            <p>Status: {status}</p>
+            <p>Cargo: {status}</p>
         </footer>
     )
     return content

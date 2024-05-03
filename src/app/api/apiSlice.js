@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials } from '../../features/auth/authSlice'
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://localhost:3500',
+    baseUrl: 'http://jgb.notes-api.onrender.com',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token
@@ -15,13 +15,22 @@ const baseQuery = fetchBaseQuery({
 })
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
+     console.log('Argas:',args) 
+     console.log('API:',api) 
+    console.log('Extra Options:',extraOptions)
+
     let result = await baseQuery(args, api, extraOptions);
 
+    console.log('Result:', result);
+
+    // If you want, handle other status codes, too
     if (result?.error?.status === 403) {
         console.log('sending refresh token')
 
         // send refresh token to get new access token 
-        const refreshResult = await baseQuery('/auth/refresh', api, extraOptions)
+        const refreshResult = await baseQuery('/auth/refresh', api, extraOptions);
+
+        console.log('Refresh Result:', refreshResult)
 
         if (refreshResult?.data) {
 
@@ -33,12 +42,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         } else {
 
             if (refreshResult?.error?.status === 403) {
-                refreshResult.error.data.message = "Your login has expired."
+                refreshResult.error.data.message = "Tu sesión ha expirado."
             }
             return refreshResult
         }
     }
-
     return result
 }
 

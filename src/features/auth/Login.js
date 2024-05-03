@@ -1,13 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
-
-import  usePersist  from '../../hooks/usePersist'
+import usePersist from '../../hooks/usePersist'
+import useTitle from '../../hooks/useTitle'
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const Login = () => {
+    useTitle('Login Empleados')
+
     const userRef = useRef()
     const errRef = useRef()
     const [username, setUsername] = useState('')
@@ -34,8 +36,8 @@ const Login = () => {
         try {
             const { accessToken } = await login({ username, password }).unwrap()
             dispatch(setCredentials({ accessToken }))
-            setUsername('')
-            setPassword('')
+            setUsername('/')
+            setPassword('/')
             navigate('/dash')
         } catch (err) {
             if (!err.status) {
@@ -48,6 +50,9 @@ const Login = () => {
                 setErrMsg(err.data?.message);
             }
             
+            errRef.current.focus();
+        
+
         }
     }
 
@@ -57,7 +62,7 @@ const Login = () => {
 
     const errClass = errMsg ? "errmsg" : "offscreen"
 
-    if (isLoading) return <p>...</p>
+    if (isLoading) return <PulseLoader color={"#FFF"} />
 
     const content = (
         <section className="public">
@@ -89,7 +94,7 @@ const Login = () => {
                         value={password}
                         required
                     />
-                    <button className="form__submit-button">Iniciar sesión</button>
+                    <button className="form__submit-button">Iniciar Sesión</button>
 
 
                     <label htmlFor="persist" className="form__persist">
@@ -105,7 +110,7 @@ const Login = () => {
                 </form>
             </main>
             <footer>
-                <Link to="/">Home</Link>
+                <Link to="/">Volver a inicio</Link>
             </footer>
         </section>
     )

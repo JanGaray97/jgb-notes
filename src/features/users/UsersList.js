@@ -1,7 +1,10 @@
 import { useGetUsersQuery } from "./usersApiSlice"
 import User from './User'
+import useTitle from "../../hooks/useTitle"
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const UsersList = () => {
+    useTitle('JGB.Notes: Lista De Usuarios')
 
     const {
         data: users,
@@ -17,7 +20,7 @@ const UsersList = () => {
 
     let content
 
-    if (isLoading) content = <p>Cargando...</p>
+    if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
         content = <p className="errmsg">{error?.data?.message}</p>
@@ -33,9 +36,9 @@ const UsersList = () => {
             <table className="table table--users">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th user__username">Username</th>
+                        <th scope="col" className="table__th user__username">Nombre De Usuario</th>
                         <th scope="col" className="table__th user__roles">Roles</th>
-                        <th scope="col" className="table__th user__edit">Edit</th>
+                        <th scope="col" className="table__th user__edit">Editar</th>
                     </tr>
                 </thead>
                 <tbody>

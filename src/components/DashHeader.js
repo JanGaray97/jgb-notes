@@ -8,10 +8,9 @@ import {
     faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, Link, useLocation } from 'react-router-dom'
-
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
-
 import useAuth from '../hooks/useAuth'
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const DASH_REGEX = /^\/dash(\/)?$/
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/
@@ -49,7 +48,7 @@ const DashHeader = () => {
         newNoteButton = (
             <button
                 className="icon-button"
-                title="New Note"
+                title="Nueva Nota"
                 onClick={onNewNoteClicked}
             >
                 <FontAwesomeIcon icon={faFileCirclePlus} />
@@ -62,7 +61,7 @@ const DashHeader = () => {
         newUserButton = (
             <button
                 className="icon-button"
-                title="New User"
+                title="Nuevo Usuario"
                 onClick={onNewUserClicked}
             >
                 <FontAwesomeIcon icon={faUserPlus} />
@@ -76,7 +75,7 @@ const DashHeader = () => {
             userButton = (
                 <button
                     className="icon-button"
-                    title="Users"
+                    title="Usuarios"
                     onClick={onUsersClicked}
                 >
                     <FontAwesomeIcon icon={faUserGear} />
@@ -90,7 +89,7 @@ const DashHeader = () => {
         notesButton = (
             <button
                 className="icon-button"
-                title="Notes"
+                title="Notas"
                 onClick={onNotesClicked}
             >
                 <FontAwesomeIcon icon={faFilePen} />
@@ -101,7 +100,7 @@ const DashHeader = () => {
     const logoutButton = (
         <button
             className="icon-button"
-            title="Logout"
+            title="Cerrar Sesión"
             onClick={sendLogout}
         >
             <FontAwesomeIcon icon={faRightFromBracket} />
@@ -112,7 +111,7 @@ const DashHeader = () => {
 
     let buttonContent
     if (isLoading) {
-        buttonContent = <p>Logging Out...</p>
+        buttonContent = <PulseLoader color={"#FFF"} />
     } else {
         buttonContent = (
             <>
@@ -132,7 +131,7 @@ const DashHeader = () => {
             <header className="dash-header">
                 <div className={`dash-header__container ${dashClass}`}>
                     <Link to="/dash">
-                        <h1 className="dash-header__title">Notas Tecnicas</h1>
+                        <h1 className="dash-header__title">JGB.Notes</h1>
                     </Link>
                     <nav className="dash-header__nav">
                         {buttonContent}

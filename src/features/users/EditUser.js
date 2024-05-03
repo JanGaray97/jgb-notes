@@ -5,11 +5,11 @@ import PulseLoader from 'react-spinners/PulseLoader'
 import useTitle from '../../hooks/useTitle'
 
 const EditUser = () => {
-    useTitle('techNotes: Edit User')
+    useTitle('JGB.Notas: Editar USuario')
 
     const { id } = useParams()
 
-    const { user } = useGetUsersQuery("usersList", {
+    const { user } = useGetUsersQuery("Lista De Usuarios", {
         selectFromResult: ({ data }) => ({
             user: data?.entities[id]
         }),

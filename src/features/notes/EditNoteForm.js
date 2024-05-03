@@ -3,8 +3,11 @@ import { useUpdateNoteMutation, useDeleteNoteMutation } from "./notesApiSlice"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import useAuth from "../../hooks/useAuth"
 
 const EditNoteForm = ({ note, users }) => {
+
+    const { isManager, isAdmin } = useAuth()
 
     const [updateNote, {
         isLoading,
@@ -73,13 +76,27 @@ const EditNoteForm = ({ note, users }) => {
 
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
+
+    let deleteButton = null
+    if (isManager || isAdmin) {
+        deleteButton = (
+            <button
+                className="icon-button"
+                title="Delete"
+                onClick={onDeleteNoteClicked}
+            >
+                <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+        )
+    }
+
     const content = (
         <>
             <p className={errClass}>{errContent}</p>
 
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
-                    <h2>Edit Note #{note.ticket}</h2>
+                    <h2>Editar Nota #{note.ticket}</h2>
                     <div className="form__action-buttons">
                         <button
                             className="icon-button"
@@ -89,17 +106,11 @@ const EditNoteForm = ({ note, users }) => {
                         >
                             <FontAwesomeIcon icon={faSave} />
                         </button>
-                        <button
-                            className="icon-button"
-                            title="Delete"
-                            onClick={onDeleteNoteClicked}
-                        >
-                            <FontAwesomeIcon icon={faTrashCan} />
-                        </button>
+                        {deleteButton}
                     </div>
                 </div>
                 <label className="form__label" htmlFor="note-title">
-                    Title:</label>
+                    Titulo:</label>
                 <input
                     className={`form__input ${validTitleClass}`}
                     id="note-title"
@@ -111,7 +122,7 @@ const EditNoteForm = ({ note, users }) => {
                 />
 
                 <label className="form__label" htmlFor="note-text">
-                    Text:</label>
+                    texto:</label>
                 <textarea
                     className={`form__input form__input--text ${validTextClass}`}
                     id="note-text"
@@ -122,7 +133,7 @@ const EditNoteForm = ({ note, users }) => {
                 <div className="form__row">
                     <div className="form__divider">
                         <label className="form__label form__checkbox-container" htmlFor="note-completed">
-                            WORK COMPLETE:
+                            TRABAJO COMPLETADO:
                             <input
                                 className="form__checkbox"
                                 id="note-completed"
@@ -134,7 +145,7 @@ const EditNoteForm = ({ note, users }) => {
                         </label>
 
                         <label className="form__label form__checkbox-container" htmlFor="note-username">
-                            ASSIGNED TO:</label>
+                            ASIGNADO A:</label>
                         <select
                             id="note-username"
                             name="username"
@@ -146,8 +157,8 @@ const EditNoteForm = ({ note, users }) => {
                         </select>
                     </div>
                     <div className="form__divider">
-                        <p className="form__created">Created:<br />{created}</p>
-                        <p className="form__updated">Updated:<br />{updated}</p>
+                        <p className="form__created">Creado:<br />{created}</p>
+                        <p className="form__updated">Actualizado:<br />{updated}</p>
                     </div>
                 </div>
             </form>

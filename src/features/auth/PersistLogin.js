@@ -1,9 +1,10 @@
 import { Outlet, Link } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import { useRefreshMutation } from "./authApiSlice"
-import  usePersist  from "../../hooks/usePersist"
+import usePersist from "../../hooks/usePersist"
 import { useSelector } from 'react-redux'
 import { selectCurrentToken } from "./authSlice"
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const PersistLogin = () => {
 
@@ -24,7 +25,7 @@ const PersistLogin = () => {
 
     useEffect(() => {
 
-        if (effectRan.current === true || `${process.env.NODE_ENV}` !== 'development') { // React 18 Strict Mode
+        if (effectRan.current === true || process.env.NODE_ENV !== 'development') { // React 18 Strict Mode
 
             const verifyRefreshToken = async () => {
                 console.log('verifying refresh token')
@@ -54,13 +55,13 @@ const PersistLogin = () => {
         content = <Outlet />
     } else if (isLoading) { //persist: yes, token: no
         console.log('loading')
-        content = <p>Cargando...</p>
+        content = <PulseLoader color={"#FFF"} />
     } else if (isError) { //persist: yes, token: no
         console.log('error')
         content = (
             <p className='errmsg'>
                 {`${error?.data?.message} - `}
-                <Link to="/login">Por favor inicia sesión nuevamente</Link>.
+                <Link to="/login">Please login again</Link>.
             </p>
         )
     } else if (isSuccess && trueSuccess) { //persist: yes, token: yes

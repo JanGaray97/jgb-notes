@@ -7,19 +7,19 @@ import PulseLoader from 'react-spinners/PulseLoader'
 import useTitle from '../../hooks/useTitle'
 
 const EditNote = () => {
-    useTitle('techNotes: Edit Note')
+    useTitle('JGB.Notes: Editar Notas')
 
     const { id } = useParams()
 
     const { username, isManager, isAdmin } = useAuth()
 
-    const { note } = useGetNotesQuery("notesList", {
+    const { note } = useGetNotesQuery("Lista De Notas", {
         selectFromResult: ({ data }) => ({
             note: data?.entities[id]
         }),
     })
 
-    const { users } = useGetUsersQuery("usersList", {
+    const { users } = useGetUsersQuery("Lista De Usuarios", {
         selectFromResult: ({ data }) => ({
             users: data?.ids.map(id => data?.entities[id])
         }),
@@ -30,7 +30,7 @@ const EditNote = () => {
 
     if (!isManager && !isAdmin) {
         if (note.username !== username) {
-            return <p className="errmsg">Sin acceso</p>
+            return <p className="errmsg">Sin Acceso</p>
         }
     }
 
